@@ -1,0 +1,14 @@
+<div class="d-flex">
+  <div>
+    <img src="@Item.ImageUrl" width="64" height="64"/>
+  </div>
+  <div>
+    <h1>@Item.Name</h1>
+    <p>@Item.Description</p>
+  </div>
+</div>
+
+@code {
+	[Parameter]
+	public ResumeEntry Item { get; set; }
+}

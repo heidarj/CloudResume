@@ -1,0 +1,35 @@
+﻿@page "/"
+@inject HttpClient Http
+
+<PageTitle>Heiðar Holmberg Jónsson - Cloud resume</PageTitle>
+
+<h1>Welcome to my cloud resume!</h1>
+
+<p>This is a cloud resume for Heiðar Hólmberg Jónsson</p>
+
+<p>Visitor count: @visitorCount</p>
+
+@foreach (var item in resumeEntries)
+{
+	<ResumeItem Item="@item" />
+}
+
+@code{
+	private int visitorCount;
+
+	private List<ResumeEntry> resumeEntries = new List<ResumeEntry>()
+	{
+		new ResumeEntry {
+			Name = "Advania",
+			StartDate = new DateTime(2019, 8, 1),
+			Postion = "Software developer",
+			Description = "Working as a software developer",
+			ImageUrl = "https://pbs.twimg.com/profile_images/849020367490428928/eHPXGZej_400x400.jpg",
+		}
+	};
+	
+	protected override async Task OnInitializedAsync()
+	{
+		var response = await Http.GetFromJsonAsync<int>("api/VisitorCount");
+	}
+}
